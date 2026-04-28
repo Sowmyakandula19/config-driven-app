@@ -1,0 +1,64 @@
+{
+  "app": {
+    "name": "AppForge",
+    "theme": "dark",
+    "locale": "en"
+  },
+  "auth": {
+    "methods": ["email", "google"],
+    "userScoped": true
+  },
+  "entities": [
+    {
+      "name": "Product",
+      "fields": [
+        { "name": "title", "type": "string", "required": true },
+        { "name": "price", "type": "number", "required": false },
+        { "name": "category", "type": "enum", "options": ["Electronics", "Food", "Clothing", "Tech"] },
+        { "name": "inStock", "type": "boolean", "required": false },
+        { "name": "description", "type": "string", "required": false }
+      ]
+    },
+    {
+      "name": "Task",
+      "fields": [
+        { "name": "title", "type": "string", "required": true },
+        { "name": "status", "type": "enum", "options": ["Todo", "In Progress", "Done"] },
+        { "name": "priority", "type": "enum", "options": ["Low", "Medium", "High"] },
+        { "name": "dueDate", "type": "string", "required": false },
+        { "name": "notes", "type": "string", "required": false }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "route": "/products",
+      "title": "Products",
+      "type": "table",
+      "entity": "Product",
+      "actions": ["create", "edit", "delete"]
+    },
+    {
+      "route": "/tasks",
+      "title": "Tasks",
+      "type": "table",
+      "entity": "Task",
+      "actions": ["create", "edit", "delete"]
+    },
+    {
+      "route": "/dashboard",
+      "title": "Dashboard",
+      "type": "dashboard",
+      "widgets": [
+        { "type": "stat", "label": "Total Products", "entity": "Product" },
+        { "type": "stat", "label": "Total Tasks", "entity": "Task" },
+        { "type": "chart", "chartType": "bar", "entity": "Product", "groupBy": "category", "label": "Products by Category" },
+        { "type": "chart", "chartType": "pie", "entity": "Task", "groupBy": "status", "label": "Task Status" }
+      ]
+    }
+  ],
+  "notifications": {
+    "events": ["onCreate", "onDelete"],
+    "email": true
+  }
+}
