@@ -81,11 +81,12 @@ GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
 `);
 
-  const buffer = await zip.generateAsync({ type: 'nodebuffer' });
+   const buffer = await zip.generateAsync({ type: 'nodebuffer' });
 
-return new NextResponse(new Blob([buffer]), {
-  headers: {
-    'Content-Type': 'application/zip',
-    'Content-Disposition': `attachment; filename="${appConfig.app.name.replace(/\s+/g, '-')}-export.zip"`,
-  },
-});
+  return new NextResponse(new Blob([buffer]), {
+    headers: {
+      'Content-Type': 'application/zip',
+      'Content-Disposition': `attachment; filename="${appConfig.app.name.replace(/\s+/g, '-')}-export.zip"`,
+    },
+  });
+}
